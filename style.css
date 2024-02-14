@@ -42,3 +42,28 @@ body {
   justify-content: space-between;
   padding: 1em;
 }
+
+#taskDetail {
+  width: 100%;
+  text-decoration: line-through;
+}
+
+.taskBtn {
+  display: flex;
+}
+
+.task button {
+  all: unset;
+  cursor: pointer;
+  width: 50px;
+  /* background-color: red; */
+  text-align: center;
+}
+
+.fa-check {
+  color: lightgreen;
+}
+
+.fa-xmark {
+  color: crimson;
+}
