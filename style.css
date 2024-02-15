@@ -198,3 +198,17 @@ header p {
 #removeBtn .fa-xmark {
   color: crimson;
 }
+
+@media (max-width: 400px) {
+  header h1 {
+    font-size: 40px;
+  }
+
+  .sub_title h3 {
+    font-size: 16px;
+  }
+
+  .sub_title p {
+    font-size: 16px;
+  }
+}
