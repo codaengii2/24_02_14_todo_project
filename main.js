@@ -13,7 +13,19 @@
 let taskInput = document.getElementById("task-input");
 // console.log(taskInput);
 let addButton = document.getElementById("add-button");
+let tabs = document.querySelectorAll(".task-tabs div");
 let taskList = [];
+let mode = "all";
+// 처음에 모드는 항상 모두 이니까
+let filterList = [];
+
+for (let i = 1; i < tabs.length; i++) {
+  tabs[i].addEventListener("click", function (event) {
+    filter(event);
+  });
+}
+//task-area div 중 뒤에 세개만 가져옴
+// console.log(tabs);
 
 addButton.addEventListener("click", addTask);
 
@@ -28,27 +40,39 @@ function addTask() {
   taskList.push(task);
   // console.log(taskList);
   render();
+  taskInput.value = "";
 }
 
 //그림그리는 부분
 function render() {
+  //1. 내가 선택한 탭에 따라서
+  let list = [];
+  if (mode === "all") {
+    // all taskLisk
+    list = taskList;
+  } else if (mode === "ongoing" || mode === "done") {
+    // ongoing, done filterList
+    list = filterList;
+  }
+  // 2. 리스트를 달리 보여줌 taskList => list
   let resultHTML = "";
 
-  for (let i = 0; i < taskList.length; i++) {
-    if (taskList[i].isComplete == true) {
+  // 상황에
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].isComplete == true) {
       resultHTML += `<div class="task">
-      <div id="taskDetail">${taskList[i].taskContent}</div>
+      <div id="taskDetail">${list[i].taskContent}</div>
       <div class="taskBtn">
-        <button id="checkBtn" onClick="toggleComplete('${taskList[i].id}')"><i class="fa-solid fa-rotate-right"></i></button>
-        <button id="removeBtn" onClick="deleteTask('${taskList[i].id}')"><i class="fa-solid fa-xmark"></i></button>
+        <button id="checkBtn" onClick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-rotate-right"></i></button>
+        <button id="removeBtn" onClick="deleteTask('${list[i].id}')"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>`;
     } else {
       resultHTML += `<div class="task">
-      <div>${taskList[i].taskContent}</div>
+      <div>${list[i].taskContent}</div>
       <div class="taskBtn">
-        <button id="checkBtn" onClick="toggleComplete('${taskList[i].id}')"><i class="fa-solid fa-check"></i></button>
-        <button id="removeBtn" onClick="deleteTask('${taskList[i].id}')"><i class="fa-solid fa-xmark"></i></button>
+        <button id="checkBtn" onClick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-check"></i></button>
+        <button id="removeBtn" onClick="deleteTask('${list[i].id}')"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>`;
     }
@@ -70,6 +94,7 @@ function render() {
 
 function toggleComplete(id) {
   // console.log("id", id);
+
   for (let i = 0; i < taskList.length; i++) {
     if (taskList[i].id == id) {
       taskList[i].isComplete = !taskList[i].isComplete;
@@ -81,14 +106,45 @@ function toggleComplete(id) {
 }
 
 function deleteTask(id) {
-  for (let i = 0; i < taskList.length; i++) {
-    if (taskList[i].id == id) {
-      taskList.splice(i, 1);
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].id == id) {
+      list.splice(i, 1);
       break;
     }
   }
-  render();
   //값이 업데이트 되면 UI도 업데이트 돼야한다!
+  render();
+}
+
+function filter(event) {
+  // console.log("filter", event.target.id);
+  //target의 id 값만 들고옴
+  mode = event.target.id;
+  filterList = [];
+
+  if (mode === "all") {
+    //전체리스트 보여줌
+    render();
+  } else if (mode === "ongoing") {
+    //진행중 아이템 보여줌
+    //task.isComplete = false
+    for (let i = 0; i < taskList.length; i++) {
+      if (taskList[i].isComplete === false) {
+        filterList.push(taskList[i]);
+      }
+    }
+    render();
+    // console.log("진행중", filterList);
+  } else if (mode === "done") {
+    //끝나는 케이스
+    //task.isComplete = true
+    for (let i = 0; i < taskList.length; i++) {
+      if (taskList[i].isComplete === true) {
+        filterList.push(taskList[i]);
+      }
+    }
+    render();
+  }
 }
 
 function randomIDGenerate() {

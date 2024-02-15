@@ -1,16 +1,136 @@
 body {
   margin: 0;
-  background-image: url("image/Space-Background-Image-2-1536x1024.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  /* background-image: url("image/Space-Background-Image-2-1536x1024.jpg"); */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  background-color: black;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+}
+
+header {
+  padding: 3em 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  background-color: black;
+  font-size: 50px;
+  font-weight: 300;
+}
+
+header h3 {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 20px;
+}
+
+header p {
+  font-weight: 300;
+  font-size: 20px;
 }
 
 .container {
-  background-color: white;
+  background-color: rgb(0, 0, 0);
   min-height: 100vh;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.task-plus {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-border-color: #fff;
+}
+
+.modal {
+  /* height: 30vh; */
+  border-radius: 30px;
+}
+
+.modal-header {
+  border-bottom: 0;
+  align-items: baseline;
+  padding: 1em;
+}
+
+.modal-header-title {
+  /* height: 20px; */
+  font-size: 30px;
+  margin-right: 0.5em;
+}
+
+.modal-header-sub-title {
+  font-size: 18px;
+  /* font-weight: 600; */
+}
+
+.modal-content {
+  background-color: black;
+  border: 2px solid #fff;
+  padding: 1em;
+}
+
+.modal-body {
+  width: 100%;
+  /* padding: 2em 1em; */
+  display: flex;
+  justify-content: space-between;
+}
+
+#task-input {
+  all: unset;
+  width: 83%;
+  height: 50px;
+  background-color: #fff;
+  font-size: 18px;
+  color: #000;
+  padding: 1em 0.5em;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+#add-button {
+  all: unset;
+  width: 60px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #fff;
+  /* font-weight: 900; */
+  /* margin-left: 1em; */
+}
+
+#add-button:hover {
+  background-color: #fff;
+  color: #000;
+  transition: 0.5s;
+  font-weight: 900;
+}
+
+.btn-close .fa-xmark {
+  font-size: 30px;
+}
+
+.btn-close {
+  --bs-btn-close-color: #fff;
+  --bs-btn-close-bg: none;
+  --bs-btn-close-focus-shadow: #000;
 }
 
 .task-area {
@@ -43,6 +163,10 @@ body {
   padding: 1em;
 }
 
+.task-tabs div {
+  cursor: pointer;
+}
+
 #taskDetail {
   width: 100%;
   text-decoration: line-through;
@@ -64,6 +188,6 @@ body {
   color: lightgreen;
 }
 
-.fa-xmark {
+#removeBtn .fa-xmark {
   color: crimson;
 }
