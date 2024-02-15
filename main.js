@@ -14,10 +14,20 @@ let taskInput = document.getElementById("task-input");
 // console.log(taskInput);
 let addButton = document.getElementById("add-button");
 let tabs = document.querySelectorAll(".task-tabs div");
+let plus = document.querySelector(".task-plus");
 let taskList = [];
 let mode = "all";
 // 처음에 모드는 항상 모두 이니까
 let filterList = [];
+let list = [];
+
+taskInput.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    addButton.click();
+    // plus.disabled = true;
+  }
+});
 
 for (let i = 1; i < tabs.length; i++) {
   tabs[i].addEventListener("click", function (event) {
@@ -47,7 +57,7 @@ function addTask() {
 //그림그리는 부분
 function render() {
   //1. 내가 선택한 탭에 따라서
-  let list = [];
+  list = [];
   if (mode === "all") {
     // all taskLisk
     list = taskList;
@@ -58,7 +68,6 @@ function render() {
   // 2. 리스트를 달리 보여줌 taskList => list
   let resultHTML = "";
 
-  // 상황에
   for (let i = 0; i < list.length; i++) {
     if (list[i].isComplete == true) {
       resultHTML += `<div class="task">
@@ -107,9 +116,9 @@ function toggleComplete(id) {
 }
 
 function deleteTask(id) {
-  for (let i = 0; i < taskList.length; i++) {
-    if (taskList[i].id == id) {
-      taskList.splice(i, 1);
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].id == id) {
+      list.splice(i, 1);
       break;
     }
   }
