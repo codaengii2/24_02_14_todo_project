@@ -24,6 +24,7 @@ for (let i = 1; i < tabs.length; i++) {
     filter(event);
   });
 }
+
 //task-area div 중 뒤에 세개만 가져옴
 // console.log(tabs);
 
@@ -106,9 +107,9 @@ function toggleComplete(id) {
 }
 
 function deleteTask(id) {
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].id == id) {
-      list.splice(i, 1);
+  for (let i = 0; i < taskList.length; i++) {
+    if (taskList[i].id == id) {
+      taskList.splice(i, 1);
       break;
     }
   }
@@ -117,6 +118,11 @@ function deleteTask(id) {
 }
 
 function filter(event) {
+  tabs[0].style.left = event.currentTarget.offsetLeft + "px";
+  tabs[0].style.width = event.currentTarget.offsetWidth + "px";
+  tabs[0].style.top =
+    event.currentTarget.offsetTop + event.currentTarget.offsetHeight + "px" - 4;
+
   // console.log("filter", event.target.id);
   //target의 id 값만 들고옴
   mode = event.target.id;
