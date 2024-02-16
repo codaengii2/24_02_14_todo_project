@@ -61,6 +61,7 @@ function render() {
   if (mode === "all") {
     // all taskLisk
     list = taskList;
+    console.log(list);
   } else if (mode === "ongoing" || mode === "done") {
     // ongoing, done filterList
     list = filterList;
@@ -112,35 +113,48 @@ function toggleComplete(id) {
       //for문이 돌지않고 true 되자마자 다시 나오게
     }
   }
-  render();
+  // render();
+  filter();
 }
 
 function deleteTask(id) {
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].id == id) {
-      list.splice(i, 1);
+  for (let i = 0; i < taskList.length; i++) {
+    if (taskList[i].id == id) {
+      taskList.splice(i, 1);
       break;
     }
   }
   //값이 업데이트 되면 UI도 업데이트 돼야한다!
-  render();
+  // render();
+  filter();
 }
 
 function filter(event) {
-  tabs[0].style.left = event.currentTarget.offsetLeft + "px";
-  tabs[0].style.width = event.currentTarget.offsetWidth + "px";
-  tabs[0].style.top =
-    event.currentTarget.offsetTop + event.currentTarget.offsetHeight + "px" - 4;
+  if (event) {
+    mode = event.target.id;
+    tabs[0].style.left = event.currentTarget.offsetLeft + "px";
+    tabs[0].style.width = event.currentTarget.offsetWidth + "px";
+    tabs[0].style.top =
+      event.currentTarget.offsetTop +
+      event.currentTarget.offsetHeight +
+      "px" -
+      4;
+  }
 
   // console.log("filter", event.target.id);
   //target의 id 값만 들고옴
-  mode = event.target.id;
   filterList = [];
 
-  if (mode === "all") {
+  /*   if (mode === "all") {
     //전체리스트 보여줌
-    render();
-  } else if (mode === "ongoing") {
+    // render();
+    for (let i = 0; i < taskList.length; i++) {
+      if (taskList[i] === false || taskList[i] === true) {
+        filterList.push(taskList[i]);
+      }
+    }
+  } else  */
+  if (mode === "ongoing") {
     //진행중 아이템 보여줌
     //task.isComplete = false
     for (let i = 0; i < taskList.length; i++) {
@@ -148,7 +162,6 @@ function filter(event) {
         filterList.push(taskList[i]);
       }
     }
-    render();
     // console.log("진행중", filterList);
   } else if (mode === "done") {
     //끝나는 케이스
@@ -158,8 +171,8 @@ function filter(event) {
         filterList.push(taskList[i]);
       }
     }
-    render();
   }
+  render();
 }
 
 function randomIDGenerate() {
