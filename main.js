@@ -43,6 +43,10 @@ addButton.addEventListener("click", addTask);
 function addTask() {
   // console.log("clicked");
   // let taskContent = taskInput.value;
+  if (taskInput.value === "") {
+    alert("할 일을 적어주세요!");
+    return;
+  }
   let task = {
     id: randomIDGenerate(),
     taskContent: taskInput.value,
