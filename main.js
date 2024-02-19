@@ -1,5 +1,5 @@
 // 유저가 값을 입력
-// + 버튼 클릭하면, 할일이 쿠가
+// + 버튼 클릭하면, 할일이 추가
 // delete 버튼을 누르면 할일이 삭제
 // check버튼을 누르면 할일이 끝나면서 밑줄
 // 1. check버튼을 클릭하는 순간 true false
@@ -183,3 +183,6 @@ function randomIDGenerate() {
   return "_" + Math.random().toString(36).substr(2, 9);
 }
 //정보에는 id값이 필요
+//랜덤으로 값을 가져오는데 36자 이상
+//substr은 특정위치에서 시작하여 특정 문자수만큼 반환
+//substr(2,9) 인덱스 번호 2번 이후 9개의 문자열 반환
